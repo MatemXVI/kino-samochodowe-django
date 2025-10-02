@@ -1,0 +1,33 @@
+{% extends "app.html" %}
+
+{% block title %}Kino samochodowe{% endblock %}
+
+{% block content %}
+        <h2>Bilety:</h2>
+        <div id='bilety'>
+        {% if tickets %}
+            {% for ticket in tickets %}
+                {% comment %}
+                    {% if forloop.first %}
+                        <div class='bilety_kolumna'> //kolumna za bardzo idzie na lewo
+                    {% endif %}
+                {% endcomment %}
+                <div class='numer_biletu'><b><a href="{% url "tickets_show" pk=ticket.id %}"> {{ ticket.id }}</a></b></div>
+                {% comment %}
+                    {% if forloop.counter|divisibleby:10 %}
+                    </div>
+                {% endif %}
+                {% endcomment %}
+                {% if forloop.last and forloop.counter|divisibleby:10 == false %}
+                </div><div style='clear:both'></div></div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <h3>Nie masz żadnych biletów!</h3>
+        {% endif %}
+    {% for message in messages %}
+        <span class="success">{{ message }}</span>
+    {% endfor %}
+
+
+{% endblock %}

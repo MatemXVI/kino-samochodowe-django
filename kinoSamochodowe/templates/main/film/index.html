@@ -1,0 +1,102 @@
+{% extends "app.html" %}
+
+{% block title %}Kino samochodowe{% endblock %}
+
+{% block scripts %}
+    <script>
+        function disable(checkbox,form){
+            if(document.getElementById(checkbox).checked == true){
+                document.getElementById(form).disabled = false
+            }else{
+                document.getElementById(form).disabled = true
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block left-select %}
+    
+    <div class="pasek_z_menu" style="margin-left:611px;">
+    <div class = "menu">
+    
+{% endblock %}
+
+{% block right-select %}
+
+        </div>
+    </div>
+     <div class ="wybor">
+        <form method="get" id="repertuar" class="users">
+            <select class="select_index" name="venue" onchange="this.form.submit()">
+            {% if venue_id %}
+                <option value="{{ selected_venue.id }}"> {{ selected_venue.city }}, ul.{{ selected_venue.street }} </option>
+                {% for venue in venues %}
+                    <option value="{{ venue.id }}"> {{ venue.city }}, ul.{{ venue.street }} </option>
+                {% endfor %}
+                <option value=''>Wszystkie miejsca</option>
+            {% else %}
+                <option value=''>Wszystkie miejsca</option>
+                {% for venue in venues %})
+                    <option value="{{ venue.id }}"> {{ venue.city }}, ul.{{ venue.street }} </option>
+                {% endfor %}
+            {% endif %}
+
+            </select>
+    </div>
+    <div style="clear:both"></div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="tydzien">
+        <div class="dni">
+            <ul>
+                {% for day in days %}
+                <li class="dzien">
+                    <button type="submit" class="przycisk" name="date" value="{{ day|date:'Y-m-d' }}">
+                        <div>{{ day|date:'D' }}</div>
+                        <div>{{ day|date:'d.m' }}</div>
+                    </button>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="data_pasek">Wybierz inną datę: <label><input type="checkbox" id="chbx_data" onclick="disable('chbx_data','data')"><input type="date" id="data" name='data' title="Wybierz datę" onchange="this.form.submit()" disabled></label></div>
+        <div class="all">
+            <button type='submit' class='przycisk' name="all"><b>Pokaż repertuar na tydzień</b></button>
+        </div>
+    </form>
+        {% if venue_id %}
+            <h3>Filmy w: {{ selected_venue.city }}, ul.{{ selected_venue.street }} </h3>
+        {% endif %}
+    </div>
+{% if films %}
+    <div class="movies">
+        {% for film in films %}
+                {% if forloop.first %}
+                    <div class = "linia_repertuaru">
+                {% endif %}
+                <div class="repertuar">
+                {% if film.poster_filename %}
+                    <div><img src={{ film.poster_filename.url }}  alt='' width='261' height='377'></div>
+                {% endif %}
+                <a href="{% url "films_show" pk=film.id %}" title='Informacje o seansie'>{{ film.title }}</a>
+                {% for hour in film.hours %}
+                    <a href="{% url "tickets_parking" %}?screening_id={{ hour.id }}"> <b>{{ hour.hour }}</b></a>
+                {% endfor %}
+                <div class='krotki_opis'>
+                    {{ film.genre }} | {{ film.duration }} min | {{ film.country }} | ( {{ film.production_year }} )
+                </div></div>
+            {% if forloop.counter|divisibleby:3 or forloop.last %}
+                </div><div style='clear:both'></div><hr>
+            {% endif %}
+        {% endfor %}
+
+    </div>
+    {% else %}
+        <h2>Brak filmów!</h2>
+    {% endif %}
+
+{% endblock %}

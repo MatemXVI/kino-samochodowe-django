@@ -1,0 +1,73 @@
+{% extends "app.html" %}
+
+{% block title %}Kino samochodowe{% endblock %}
+
+{% block scripts %}
+    <script>
+        function disable(checkbox, form) {
+            if (document.getElementById(checkbox).checked == true) {
+                document.getElementById(form).disabled = false
+            } else {
+                document.getElementById(form).disabled = true
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+<h1>Wybierz dane do edycji</h1>
+<div class="formularz">
+    <form action="{% url "user_edit" %}" method="post">
+        {% csrf_token %}
+        <div class="pole_formularza_maly_odstep"><label>Adres e-mail:<br>{{ form.email }}</label></div>
+        <div class="pole_formularza_maly_odstep"><label>Login:<br>{{ form.username }}</label></div>
+        <div class="pole_formularza_maly_odstep"><label>Imię:<br>{{ form.first_name }}</label></div>
+        <div class="pole_formularza_maly_odstep"><label>Nazwisko:<br>{{ form.last_name }}</label></div>
+        <div class="pole_formularza_maly_odstep"><label>Telefon:<br>{{ form.phone_number }}</label></div>
+        <div class="pole_formularza_maly_odstep"><label>Wiek: {{ form.age }}</label></div>
+        <div><input type="submit" name="update_data" value="Zmień dane"></div>
+    </form>
+</div>
+{% if form.errors %}
+  {% for error in form.non_field_errors %}
+    <span class="error">{{ error }}</span>
+  {% endfor %}
+  {% for field in form %}
+    {% for error in field.errors %}
+      <span class="error">{{ error }}</span>
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+    {% for message in messages %}
+      {% if "user" in message.tags %}
+        <span class="success">{{ message }}</span>
+      {% endif %}
+    {% endfor %}
+<hr>
+<h2>Zmień hasło</h2>
+<div class="formularz">
+    <form action="{% url "user_edit" %}" method="post">
+        {% csrf_token %}
+        <div class="pole_formularza_maly_odstep">{{ password_form.old_password.label_tag }}<br>{{ password_form.old_password }}</div>
+        <div class="pole_formularza_maly_odstep">{{ password_form.password1.label_tag }}<br>{{ password_form.password1 }}</div>
+        <div class="pole_formularza_maly_odstep">{{ password_form.password2.label_tag }}<br>{{ password_form.password2 }}</div>
+        <div class="przycisk_formularz"><input type="submit" name="update_password" value="Zmień hasło"></div>
+    </form>
+</div>
+{% if password_form.errors %}
+  {% for error in password_form.non_field_errors %}
+    <span class="error">{{ error }}</span>
+  {% endfor %}
+  {% for field in password_form %}
+    {% for error in field.errors %}
+      <span class="error">{{ error }}</span>
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+{% for message in messages %}
+  {% if "password" in message.tags %}
+    <span class="success">{{ message }}</span>
+  {% endif %}
+{% endfor %}
+
+{% endblock %}

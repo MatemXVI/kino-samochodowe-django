@@ -1,0 +1,16 @@
+{% extends "app.html" %}
+
+{% block title %}Kino samochodowe{% endblock %}
+
+{% block content %}
+    <h2>{{ user.username }}</h2>
+    <div id="user">
+        <div class="ustawienia_user">
+            <b><a href="{% url "tickets_index" %}">Bilety</a></b>
+        </div>
+        <div class="ustawienia_user">
+            <b><a href="{% url "user_edit" %}">Zmień dane</a></b>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "app.html" %}
+
+{% block title %}Kino samochodowe{% endblock %}
+
+{% block content %}
+
+    <h2>Wybierz sposób płatności</h2>
+    <form action="{% url "tickets_summary" %}" method="post">
+        {% csrf_token %}
+        <table align="center" id="platnosc">
+            {% load static %}
+            <tr><td><label><input type="radio" name="payment" value="Karta płatnicza" required>Karta płatnicza</label><img src="{% static 'img/visa_mastercard.png' %}" height="34"></td></tr>
+            <tr><td><label><input type="radio" name="payment" value="Google Pay">Google Pay</label><img src="{% static 'img/google_pay.png' %}" height="34"></td></tr>
+            <tr><td><label><input type="radio" name="payment" value="BLIK">BLIK</label><img src="{% static 'img/blik.png' %}" height="34"></td></tr>
+            <tr><td><label><input type="radio" name="payment" value="Przelew online">Przelew online</label><img src="{% static 'img/payu.png' %}" height="34"></td></tr>
+            <tr><td><label><input type="radio" name="payment" value="Paypal">Paypal</label><img src="{% static 'img/paypal.png' %}" height="34"></td></tr>
+        </table>
+        <input type="hidden" name="parking_spot_number" value= {{ parking_spot_number }}>
+        <input type="hidden" name="screening_id" value={{ screening_id }}>
+        <input type="submit" value="Wybierz płatność">
+    </form><br>
+
+{% endblock %}

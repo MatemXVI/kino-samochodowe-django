@@ -1,0 +1,42 @@
+{% extends "app.html" %}
+
+{% block title %}Kino samochodowe{% endblock %}
+
+{% block content %}
+    <h1>Zarejestruj się</h1>
+    <div class="formularz">
+        <form action="{% url "register" %}" method="post">
+        {% csrf_token %}
+            <table align="center">
+                <tr>
+                    <td>{{ form.email.label_tag }}<sup>*</sup><br>{{ form.email }}</td>
+                    <td>{{ form.username.label_tag }}<sup>*</sup><br>{{ form.username }}</td>
+                </tr><tr>
+                    <td>{{ form.first_name.label_tag }}<sup>*</sup><br>{{ form.first_name }}</td>
+                    <td>{{ form.password1.label_tag }}<sup>*</sup><br>{{ form.password1 }}</td>
+                </tr><tr>
+                    <td>{{ form.last_name.label_tag }}<sup>*</sup><br>{{ form.last_name }}</td>
+                    <td>{{ form.password2.label_tag }}<sup>*</sup><br>{{ form.password2 }}</td>
+                </tr><tr>
+                    <td>{{ form.age.label_tag }}<sup>*</sup><br>{{ form.age }}</td>
+                    <td>{{ form.phone_number.label_tag }}<sup>*</sup><br>{{ form.phone_number }}</td>
+            </table>
+            <div class="przycisk_formularz">{{ form.terms }}<label for='regulamin' >{{ form.terms.label }}</label></div>
+            <div class="przycisk_formularz"><input type="submit" id="przycisk_formularz" name="register" value="Zarejestruj" /></div>
+        </form>
+    </div>
+{% if form.errors %}
+      {% for error in form.non_field_errors %}
+        <span class="error">{{ error }}</span>
+      {% endfor %}
+      {% for field in form %}
+        {% for error in field.errors %}
+          <span class="error">{{ error }}</span>
+        {% endfor %}
+      {% endfor %}
+{% endif %}
+    {% comment %}
+    Błędy można wyświetlać w okolicach pola - pod polem, albo z lewej strony dla lewych kolumn i z prawej strony dla prawych kolumn. Ze względu na czytelność kodu zrezygnowano z tego.
+    {% endcomment %}
+
+{% endblock %}

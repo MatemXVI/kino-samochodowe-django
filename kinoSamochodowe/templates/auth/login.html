@@ -1,0 +1,20 @@
+{% extends "app.html" %}
+
+{% block title %}Kino samochodowe{% endblock %}
+
+{% block content %}
+
+        <div class = "formularz">
+        <h1>Zaloguj się</h1>
+        <form action="{% url "login" %}" method="POST" id="logowanie">
+            {% csrf_token %}
+            <div class="pole_formularza">{{ form.username.label_tag }}<br>{{ form.username }}</div>
+            <div class="pole_formularza">{{ form.password.label_tag }}<br>{{ form.password }}</div>
+            <div class="przycisk_formularz"><input type="submit" id ="przycisk_formularz" name="logowanie" value="Zaloguj się"></div>
+        </form>
+    </div>
+    {% for message in messages %}
+        <span class="error">{{ message }}</span>
+    {% endfor %}
+
+{% endblock %}

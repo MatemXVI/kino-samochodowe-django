@@ -1,0 +1,37 @@
+{% extends "admin/change_form.html" %}
+
+{% block after_related_objects %}
+<h2>Parking</h2>
+    <table align="center" id="parking">
+        {% for row in rows %}
+            {% if forloop.first %}
+                <tr><td class="rzad">{{ row.page }}</td>
+            {% endif %}
+            {% if row.item.user_id == None %}
+                <td style="background-color:green">
+                    <b>{{ row.counter }}</b>
+                </td>
+            {% else %}
+                <td style="background-color:red">
+                    <a href="{% url "tickets_show" pk=row.item.id %}"><b>{{ row.counter }}</b></a>
+                </td>
+            {% endif %}
+
+            {% if row.counter|divisibleby:10 %}
+                <td class="rzad">{{ row.page }}</td></tr>
+                {% if not row.is_last %}
+                    <tr><td class="rzad">{{ row.page|add:1 }}</td>
+                {% endif %}
+            {% endif %}
+
+            {% if row.is_last and not row.counter|divisibleby:10 %}
+                {% if row.missing_cells %}
+                    {% for _ in row.missing_cells %}
+                        <td class="puste"></td>
+                    {% endfor %}
+                {% endif %}
+                <td class="rzad">{{ row.page }}</td></tr>
+            {% endif %}
+     {% endfor %}
+    </table>
+{% endblock %}

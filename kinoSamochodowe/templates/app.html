@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %} {% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% block scripts %}{% endblock %}
+    </head>
+    <body>
+        <header>
+            {% if user.is_authenticated %}
+                <div id="logged">
+                    <ul>
+                            <li><a href="{% url "user_dashboard" %}" title="Menu">{{ user.username }} </a></li>
+                            <li><a href="{% url "logout" %}"> Wyloguj się</a></li>
+                   {% comment %} @elseif(Auth::user()->role == "admin" || Auth::user()->role == "superadmin")
+                            <li><a href={{ route('admin.index')  }} title="Menu">{{ Auth::user()->login }}</a></li>
+                            <li><a href={{ route('admin.logout') }}>Wyloguj się</a></li>
+                        @endif {% endcomment %}
+                    </ul>
+                </div>
+            {% else %}
+                <div id="logged">
+                    <ul>
+                        <li><a href="{% url "login" %}">Zaloguj się</a></li>
+                        <li><a href="{% url "register" %}">Zarejestruj się</a></li>
+                    </ul>
+                </div>
+            {% endif %}
+            <h1><a href="{% url "index" %}">KINO SAMOCHODOWE</a></h1>
+{% comment %}
+            @if ((Route::is('admin.*')) || (Route::is('administrators.*')))
+                <nav class='administrator'>
+                    <a href="/" >Cofnij</a>
+                </nav>
+            @else {% endcomment %}
+                <nav>
+                    {% block left-select %}{% endblock %}
+                    <a href={% url "index" %}>REPERTUAR</a>
+                    <a href={% url "screenings_index" %}> SEANSE</a>
+                    <a href={% url "venues_index" %}>MIEJSCA</a>
+                    <a href>O NAS</a>
+                    <a href>KONTAKT</a>
+                    {% block right-select %}{% endblock %}
+                </nav>
+             {% comment %}@endif{% endcomment %}
+        </header>
+        <section>
+            {% block content %}{% endblock %}
+        </section>
+        <footer>
+            <ul>
+                <li><a href>Kino Samochodowe</a></li>
+                <li><a href>Newsletter</a></li>
+                <li><a href>Kontakt</a></li>
+            </ul>
+            <ul>
+                <li><a href>Regulacje</a></li>
+                <li><a href>Polityka prywatności</a></li>
+                <li><a href>Polityka cookies</a></li>
+            </ul>
+            <ul>
+                <li><a href>Facebook</a></li>
+                <li><a href>Instagram</a></li>
+                <li><a href>Twitter</a></li>
+            </ul><br>
+        </footer>
+    </body>
+</html>

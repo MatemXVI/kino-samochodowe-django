@@ -1,0 +1,91 @@
+{% extends "app.html" %}
+
+{% block title %}Bilet{% endblock %}
+
+{% block content %}
+
+{% load qr_code %}
+    <div id ="bilet">
+        <div id="left-side">
+            <div id="logo"><b>KINO SAMOCHODOWE</b></div>
+        </div>
+        <div id="main-side">
+            <div id="main-information">
+                <div id="id-biletu">
+                    Numer biletu: #{{ ticket.id }}<br>
+                    Wygenerowano: {{ ticket.created_at }}<br>
+                </div>
+                <div id="screening-information">
+                    <h1>{{ ticket.screening.name }}</h1>
+                </div>
+                <div id="rest-information">
+{#                    <div id="name"><b><i>{{ ticket.screening.name }}</i></b></div>#}
+                    Data seansu:
+                    <b>{{ ticket.screening.date }} {{ ticket.screening.hour }}</b><br>
+                    Numer miejsca parkingowego: <b>{{ ticket.parking_spot_number }}</b><br>
+                    Miejsce: <b>{{ ticket.screening.venue.city }} ul.{{ ticket.screening.venue.street }}</b><br>
+                </div>
+                <div id="announcement">
+                    <i>Częstotliwość stacji radiowej zostanie udostępniona przed seansem. W razie problemów technicznych proszę wezwać pomoc!</i>
+                </div>
+                <div id="price">
+                    <b>Cena: {{ ticket.screening.price }} zł</b>
+                </div>
+            </div>
+        </div>
+        <div id="top-right-side">
+            {% load static %}
+            <img src="{% static 'img/car.png' %}" alt="logo" height="200" width="400">
+        </div>
+
+        <div id="bottom-right-side">
+            {% qr_from_text data_qr size="T" image_format="png" %}
+        </div>
+    </div>
+    <div style="clear:both"></div><br>
+
+    {% if user.is_authenticated and not user.is_staff  %}
+        <form action="{% url "tickets_destroy" pk=ticket.id %}" method="POST" style="display:inline">
+        {% csrf_token %}
+            <input type="hidden" type="method_" value="DELETE">
+        <button type="submit" class="przycisk" onclick="return confirm('Czy na pewno chcesz usunąć bilet?')"><b>USUŃ BILET</b></button><br>
+        </form>
+    {% endif %}
+    {% for message in messages %}
+        <span class="success">{{ message }}</span>
+    {% endfor %}
+
+    <div id="ticketModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+     background:rgba(0,0,0,0.5); z-index:9999;">
+    <div id="ticketContent" style="background:white; margin:5% auto; padding:20px; width:80%;
+         max-width:800px; border-radius:10px; position:relative;">
+        <span id="closeModal" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px;">&times;</span>
+        <div id="ticketBody">Ładowanie...</div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const modal = document.getElementById("ticketModal");
+    const closeBtn = document.getElementById("closeModal");
+    const ticketBody = document.getElementById("ticketBody");
+
+    document.querySelectorAll(".ticket-preview-link").forEach(link => {
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+            fetch(this.href)
+                .then(response => response.text())
+                .then(html => {
+                    ticketBody.innerHTML = html;
+                    modal.style.display = "block";
+                });
+        });
+    });
+
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; }
+});
+</script>
+
+
+{% endblock %}

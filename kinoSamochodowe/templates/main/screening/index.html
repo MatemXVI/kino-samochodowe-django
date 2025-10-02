@@ -1,0 +1,110 @@
+{% extends "app.html" %}
+
+{% block title %}Seanse{% endblock %}
+
+{% block scripts %}
+    <script>
+        function disable(checkbox,form){
+            if(document.getElementById(checkbox).checked == true){
+                document.getElementById(form).disabled = false
+            }else{
+                document.getElementById(form).disabled = true
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block left-select %}
+    <div class="pasek_z_menu">
+        <div class ="wybor1">
+            <form method="get" id="repertuar">
+                <select class="select_index" name="film" onchange="this.form.submit()">
+                    {% if film_id %}
+                        <option value={{ selected_film.id }} > {{ selected_film.title }} </option>
+                        {% for film in films %}
+                            <option value={{ film.id }} > {{ film.title }} </option>
+                        {% endfor %}
+                        <option value=''>Wszystkie filmy</option>
+                    {% else %}
+                        <option value=''>Wybierz film</option>
+                        {% for film in films %}
+                            <option value={{ film.id }} > {{ film.title }} </option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+        </div>
+    <div class = "menu">
+
+{% endblock %}
+
+{% block right-select %}
+    </div>
+    <div class ="wybor">
+            <select class="select_index" name="venue" onchange="this.form.submit()">
+            {% if venue_id %}
+                <option value="{{ selected_venue.id }}"> {{ selected_venue.city }}, ul.{{ selected_venue.street }} </option>
+                {% for venue in venues %}
+                    <option value="{{ venue.id }}"> {{ venue.city }}, ul.{{ venue.street }} </option>
+                {% endfor %}
+                <option value=''>Wszystkie miejsca seansu</option>
+            {% else %}
+                <option value=''>Wybierz miejsce seansu</option>
+                {% for venue in venues %}
+                    <option value="{{ venue.id }}"> {{ venue.city }}, ul.{{ venue.street }} </option>
+                {% endfor %}
+            {% endif %}
+            </select>
+        </div>
+    <div style="clear:both"></div>
+</div>
+
+{% endblock %}
+
+{% block content %}
+    <div class="tydzien">
+        <div class="dni">
+            <ul>
+                {% for day in days %}
+                <li class="dzien">
+                    <button type="submit" class="przycisk" name="date" value="{{ day|date:'Y-m-d' }}">
+                        <div>{{ day|date:'D' }}</div>
+                        <div>{{ day|date:'d.m' }}</div>
+                    </button>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="data_pasek">Wybierz inną datę: <label><input type="checkbox" id="chbx_data" onclick="disable('chbx_data','data')"><input type="date" id="data" name='date' title="Wybierz datę" onchange="this.form.submit()" disabled></label></div>
+        <div class="all">
+            <button type='submit' class='przycisk' name="wszystko"><b>Pokaż seanse na tydzień</b></button>
+        </div>
+    </form>
+    {% if screenings %}
+        {% if venue_id %}
+            <h3>Seanse w: {{ selected_venue.city }}, ul.{{ selected_venue.street }}  </h3>
+        {% endif %}
+    </div>
+    <div class="movies">
+        {% for screening in screenings %}
+            {% if forloop.first %}
+                <div class = "linia_repertuaru">
+            {% endif %}
+		<div class="repertuar">
+            <div><img src={{ screening.poster_filename.url }} alt='' width='261' height='377'></div>
+            <a href="{% url "screenings_show" pk=screening.id %}" title='Informacje o seansie'>{{ screening.name }}</a>
+            <a href={% url "tickets_parking" %}?screening_id={{ screening.id }} > <b>{{ screening.hour }}</b></a>
+                <div class='krotki_opis'>
+                    {{ screening.date }} | {{ screening.name }} | {{ screening.venue.city }} | {{ screening.venue.street }}
+                </div>
+        </div>
+            {% if forloop.counter|divisibleby:3 or forloop.last %}
+                </div><div style='clear:both'></div><hr>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% else %}
+        <h2>Brak seansów!</h2>
+    {% endif %}
+
+{% endblock %}
+
