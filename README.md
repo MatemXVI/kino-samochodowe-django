@@ -1,6 +1,6 @@
 # 🎬 System Zarządzania Kinem Samochodowym (v2.1)
 
-Kompleksowa aplikacja webowa do obsługi sprzedaży biletów oraz seansów kina samochodowego. Projekt jest rozwinięciem autorskiej aplikacji z czystego PHP, przeniesionym na framework Django w celu optymalizacji struktury i poprawy bezpieczeństwa danych.
+Kompleksowa aplikacja webowa do obsługi sprzedaży biletów oraz seansów kina samochodowego. Projekt jest rozwinięciem autorskiej aplikacji z czystego PHP, przeniesionym na framework Django w języku Python w celu optymalizacji struktury i poprawy bezpieczeństwa danych.
 
 ## 🗄️ Architektura Danych (ERD)
 Sercem aplikacji jest autorska, relacyjna baza danych MySQL. Projekt struktury kładzie nacisk na spójność danych (klucze obce, więzy integralności) oraz wydajność zapytań przy procesach rezerwacyjnych.
@@ -25,8 +25,9 @@ Sercem aplikacji jest autorska, relacyjna baza danych MySQL. Projekt struktury k
 ## 🛠️ Technologie
 * **Backend:** Język Python 3.11 (Django 5.2.6), JavaScript.
 * **Baza danych:** MySQL (Relacyjne modelowanie danych).
-* **Integracje:** PHPQRCode (Generowanie unikalnych kluczy dostępu).
+* **Integracje:** Django QR Code (https://pypi.org/project/django-qr-code)
 * **Frontend:** HTML, CSS (layout zorientowany na użyteczność procesową).
+* **Środowisko programistyczne:** PyCharm 2025.2.2(z licencją)
 
 ---
 *Dokumentacja interfejsu graficznego:* [Link do PDF](https://github.com/MatemXVI/kino-samochodowe-laravel/blob/main/Interfejs_graficzny.pdf)  
