@@ -8,17 +8,15 @@ Projekt został wykonany w języku **Python** z wykorzystaniem frameworka **Djan
 
 ---
 
-# 📸 Zrzuty ekranu
-
 ## Strona główna
 
-![Opis filmu](screenshots/strona_glowna.PNG)
+![Strona główna](screenshots/strona_glowna.PNG)
 
 ## Opis filmu
 
 ![Opis filmu](screenshots/film.PNG)
 
-## Lista senasów
+## Lista seansów
 
 ![Lista seansów](screenshots/seanse.PNG)
 
@@ -28,15 +26,15 @@ Projekt został wykonany w języku **Python** z wykorzystaniem frameworka **Djan
 
 ## Rejestracja
 
-![Lista seansów](screenshots/rejestracja.PNG)
+![Rejestracja](screenshots/rejestracja.PNG)
 
 ## Rozkład miejsc
 
-![Logowanie](screenshots/bilety.PNG)
+![Rozkład miejsc](screenshots/bilety.PNG)
 
 ## Bilet
 
-![Logowanie](screenshots/bilet.PNG)
+![Bilet](screenshots/bilet.PNG)
 
 ---
 
@@ -64,7 +62,6 @@ Projekt został wykonany w języku **Python** z wykorzystaniem frameworka **Djan
 - MySQL
 - HTML
 - CSS
-- Bootstrap
 - JavaScript
 - Git
 
@@ -72,7 +69,7 @@ Projekt został wykonany w języku **Python** z wykorzystaniem frameworka **Djan
 
 # 🗄 Baza danych
 
-Projekt wykorzystuje relacyjną bazę danych MySQL.
+Projekt wykorzystuje relacyjną bazę danych **MySQL**.
 
 Najważniejsze encje:
 
@@ -85,6 +82,11 @@ Najważniejsze encje:
 
 ![Diagram ERD](screenshots/ERD.jpg)
 
+W repozytorium znajdują się dwa pliki `.sql` umożliwiające odtworzenie bazy danych:
+
+- `database_empty.sql` – baza zawierająca strukturę oraz podstawowe konta użytkowników
+- `database_demo.sql` – baza zawierająca strukturę oraz przykładowe dane demonstracyjne
+
 ---
 
 # 🚀 Instalacja
@@ -95,63 +97,60 @@ Najważniejsze encje:
 git clone https://github.com/MatemXVI/kino-samochodowe-django.git
 ```
 
-## 2. Przejście do katalogu
+## 2. Przejście do katalogu projektu
 
 ```bash
 cd kino-samochodowe-django
 ```
 
-## 3. Utworzenie środowiska
+## 3. Utworzenie środowiska wirtualnego
 
-Windows
+### Windows
 
 ```bash
 python -m venv venv
-```
-
-Aktywacja
-
-```bash
 venv\Scripts\activate
 ```
 
-Linux
+### Linux
 
 ```bash
+python -m venv venv
 source venv/bin/activate
 ```
 
-## 4. Instalacja bibliotek
+## 4. Instalacja wymaganych bibliotek
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 5. Konfiguracja bazy danych
+## 5. Przygotowanie bazy danych
 
-W pliku
+Utwórz bazę danych **MySQL**, a następnie zaimportuj do niej jeden z dołączonych plików `.sql`:
 
-```
-settings.py
-```
+- `database_empty.sql` – podstawowa wersja bazy
+- `database_demo.sql` – wersja zawierająca przykładowe dane demonstracyjne
 
-należy uzupełnić dane połączenia z bazą MySQL.
+Dane dostępowe do utworzonej bazy należy następnie skonfigurować w pliku `settings.py` projektu Django.
 
 ## 6. Migracje
+
+W razie potrzeby wykonaj migracje:
 
 ```bash
 python manage.py migrate
 ```
 
-## 7. Uruchomienie projektu
+## 7. Uruchomienie aplikacji
 
 ```bash
 python manage.py runserver
 ```
 
-Aplikacja będzie dostępna pod adresem
+Aplikacja będzie dostępna pod adresem:
 
-```
+```text
 http://127.0.0.1:8000
 ```
 
@@ -159,24 +158,15 @@ http://127.0.0.1:8000
 
 # 👤 Konto testowe
 
-Jeżeli projekt zawiera dane przykładowe.
+W dostarczonej bazie danych dostępne jest konto administratora:
 
-Administrator
+**E-mail:** `root@root.com`  
+**Hasło:** `root`  
+**Rola:** `superadmin`
 
-login:
-
-```
-admin
-```
-
-hasło
-
-```
-admin123
-```
+Możliwe jest również utworzenie własnego konta użytkownika z rolą `user`.
 
 ---
-
 # 📂 Struktura projektu
 
 ```
@@ -210,7 +200,6 @@ Projekt pozwolił mi zdobyć praktyczne doświadczenie w zakresie:
 - autoryzacji użytkowników
 - obsługi formularzy
 - architektury MVC (MVT w Django)
-- pracy z Git
 - organizacji większego projektu backendowego
 
 ---
@@ -219,6 +208,7 @@ Projekt pozwolił mi zdobyć praktyczne doświadczenie w zakresie:
 
 - płatności online
 - wysyłka biletów e-mailem
+- generowanie PDF z biletem
 - panel statystyk
 - integracja REST API
 - Docker
@@ -228,8 +218,6 @@ Projekt pozwolił mi zdobyć praktyczne doświadczenie w zakresie:
 
 # 👨‍💻 Autor
 
-Mateusz Milczarek
+**Mateusz Milczarek**
 
-GitHub
-
-https://github.com/MatemXVI
+[GitHub – MatemXVI](https://github.com/MatemXVI)
