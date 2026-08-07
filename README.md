@@ -12,19 +12,31 @@ Projekt został wykonany w języku **Python** z wykorzystaniem frameworka **Djan
 
 ## Strona główna
 
-![Strona główna](screenshots/strona główna.PNG)
+![Strona główna](screenshots/strona_glowna.PNG)
 
-## Repertuar
+## Opis filmu
 
-*(tutaj screen)*
+![Opis filmu](screenshots/film.PNG)
 
-## Rezerwacja miejsc
+## Lista senasów
 
-*(tutaj screen)*
+![Lista seansów](screenshots/seanse.PNG)
 
-## Panel administratora
+## Logowanie
 
-*(tutaj screen)*
+![Logowanie](screenshots/logowanie.PNG)
+
+## Rejestracja
+
+![Lista seansów](screenshots/rejestracja.PNG)
+
+## Rozkład miejsc
+
+![Logowanie](screenshots/bilety.PNG)
+
+## Bilet
+
+![Logowanie](screenshots/bilet.PNG)
 
 ---
 
