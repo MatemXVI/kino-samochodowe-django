@@ -12,7 +12,7 @@ Projekt został wykonany w języku **Python** z wykorzystaniem frameworka **Djan
 
 ## Strona główna
 
-*(tutaj screen)*
+screenshots/strona główna.PNG
 
 ## Repertuar
 
