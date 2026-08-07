@@ -1,34 +1,223 @@
-# 🎬 System Zarządzania Kinem Samochodowym (v2.1)
+# 🎬 Kino Samochodowe – Django
 
-Kompleksowa aplikacja webowa do obsługi sprzedaży biletów oraz seansów kina samochodowego. Projekt jest rozwinięciem autorskiej aplikacji z czystego PHP, przeniesionym na framework Django w języku Python w celu optymalizacji struktury i poprawy bezpieczeństwa danych.
+Aplikacja webowa umożliwiająca zarządzanie kinem samochodowym.
 
-## 🗄️ Architektura Danych (ERD)
-Sercem aplikacji jest autorska, relacyjna baza danych MySQL. Projekt struktury kładzie nacisk na spójność danych (klucze obce, więzy integralności) oraz wydajność zapytań przy procesach rezerwacyjnych.
+Projekt pozwala użytkownikom przeglądać repertuar, rezerwować miejsca parkingowe, kupować bilety oraz zarządzać swoim kontem. Administrator posiada panel administracyjny umożliwiający zarządzanie filmami, seansami, użytkownikami oraz rezerwacjami.
 
-![Diagram ERD](ERD.jpg)
-
-*Logika bazy uwzględnia zaawansowane relacje (1:N, M:N) pomiędzy użytkownikami, seansami a dynamicznie przydzielanymi miejscami parkingowymi.*
-
-## 🚀 Funkcjonalności
-
-### Zarządzanie Danymi (Panel Administratora)
-* **Administracja Zasobami:** Pełne zarządzanie bazą filmów, seansów oraz parametrami miejsc seansu.
-* **Analityka Rezerwacji:** Podgląd i modyfikacja statusów biletów, monitorowanie obłożenia miejsc parkingowych oraz zarządzanie bazą użytkowników.
-* **Hierarchia Uprawnień:** System ról (Główny Administrator / Administrator) kontrolujący dostęp do wrażliwych danych systemowych.
-
-### Moduł Użytkownika
-* **Przegląd Ofert:** Dynamiczne wyświetlanie aktualnych seansów pobieranych z bazy.
-* **Proces Transakcyjny:** Wybór miejsca na interaktywnym planie parkingu, walidacja dostępności w czasie rzeczywistym i zakup biletu (wymagana autoryzacja).
-* **Zarządzanie Biletami:** Możliwość rezygnacji z transakcji z automatyczną aktualizacją statusu miejsca w bazie.
-* **Generowanie Identyfikatorów:** Tworzenie unikalnych kodów QR z danymi użytkownika dla potrzeb weryfikacji wjazdowej.
-
-## 🛠️ Technologie
-* **Backend:** Język Python 3.11 (Django 5.2.6), JavaScript.
-* **Baza danych:** MySQL (Relacyjne modelowanie danych).
-* **Integracje:** Django QR Code (https://pypi.org/project/django-qr-code)
-* **Frontend:** HTML, CSS (layout zorientowany na użyteczność procesową).
-* **Środowisko programistyczne:** PyCharm 2025.2.2(z licencją)
+Projekt został wykonany w języku **Python** z wykorzystaniem frameworka **Django** jako projekt rozwijający umiejętności tworzenia aplikacji backendowych oraz projektowania relacyjnych baz danych.
 
 ---
-*Dokumentacja interfejsu graficznego:* [Link do PDF](https://github.com/MatemXVI/kino-samochodowe-laravel/blob/main/Interfejs_graficzny.pdf)  
-*Pierwsza wersja (Raw PHP):* [GitHub Repository](https://github.com/MatemXVI/kino_samochodowe)
+
+# 📸 Zrzuty ekranu
+
+## Strona główna
+
+*(tutaj screen)*
+
+## Repertuar
+
+*(tutaj screen)*
+
+## Rezerwacja miejsc
+
+*(tutaj screen)*
+
+## Panel administratora
+
+*(tutaj screen)*
+
+---
+
+# ✨ Funkcjonalności
+
+- Rejestracja użytkowników
+- Logowanie i autoryzacja
+- Role użytkowników
+- Zarządzanie filmami
+- Zarządzanie repertuarem
+- Zarządzanie seansami
+- Rezerwacja miejsc
+- Zakup biletów
+- Generowanie kodów QR
+- Historia zakupów
+- Panel administratora
+- Zarządzanie użytkownikami
+
+---
+
+# 🛠 Technologie
+
+- Python
+- Django
+- MySQL
+- HTML
+- CSS
+- Bootstrap
+- JavaScript
+- Git
+
+---
+
+# 🗄 Baza danych
+
+Projekt wykorzystuje relacyjną bazę danych MySQL.
+
+Najważniejsze encje:
+
+- Users
+- Movies
+- Screenings
+- Tickets
+- Reservations
+- ParkingPlaces
+
+*(tu możesz wkleić diagram ERD)*
+
+---
+
+# 🚀 Instalacja
+
+## 1. Klonowanie repozytorium
+
+```bash
+git clone https://github.com/MatemXVI/kino-samochodowe-django.git
+```
+
+## 2. Przejście do katalogu
+
+```bash
+cd kino-samochodowe-django
+```
+
+## 3. Utworzenie środowiska
+
+Windows
+
+```bash
+python -m venv venv
+```
+
+Aktywacja
+
+```bash
+venv\Scripts\activate
+```
+
+Linux
+
+```bash
+source venv/bin/activate
+```
+
+## 4. Instalacja bibliotek
+
+```bash
+pip install -r requirements.txt
+```
+
+## 5. Konfiguracja bazy danych
+
+W pliku
+
+```
+settings.py
+```
+
+należy uzupełnić dane połączenia z bazą MySQL.
+
+## 6. Migracje
+
+```bash
+python manage.py migrate
+```
+
+## 7. Uruchomienie projektu
+
+```bash
+python manage.py runserver
+```
+
+Aplikacja będzie dostępna pod adresem
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+# 👤 Konto testowe
+
+Jeżeli projekt zawiera dane przykładowe.
+
+Administrator
+
+login:
+
+```
+admin
+```
+
+hasło
+
+```
+admin123
+```
+
+---
+
+# 📂 Struktura projektu
+
+```
+kino/
+
+movies/
+
+users/
+
+tickets/
+
+templates/
+
+static/
+
+media/
+
+manage.py
+```
+
+---
+
+# 📖 Czego nauczyłem się podczas projektu
+
+Projekt pozwolił mi zdobyć praktyczne doświadczenie w zakresie:
+
+- tworzenia aplikacji w Django
+- Django ORM
+- projektowania relacyjnych baz danych
+- migracji bazy danych
+- autoryzacji użytkowników
+- obsługi formularzy
+- architektury MVC (MVT w Django)
+- pracy z Git
+- organizacji większego projektu backendowego
+
+---
+
+# 🔮 Możliwe kierunki rozwoju
+
+- płatności online
+- wysyłka biletów e-mailem
+- panel statystyk
+- integracja REST API
+- Docker
+- testy automatyczne
+
+---
+
+# 👨‍💻 Autor
+
+Mateusz Milczarek
+
+GitHub
+
+https://github.com/MatemXVI
