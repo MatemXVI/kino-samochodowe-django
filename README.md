@@ -12,7 +12,7 @@ Projekt został wykonany w języku **Python** z wykorzystaniem frameworka **Djan
 
 ## Strona główna
 
-![Strona główna](screenshots/strona_glowna.PNG)
+![Opis filmu](screenshots/strona_glowna.PNG)
 
 ## Opis filmu
 
