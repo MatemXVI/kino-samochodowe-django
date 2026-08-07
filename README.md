@@ -83,7 +83,7 @@ Najważniejsze encje:
 - Reservations
 - ParkingPlaces
 
-*(tu możesz wkleić diagram ERD)*
+![Diagram ERD](screenshots/ERD.jpg)
 
 ---
 
